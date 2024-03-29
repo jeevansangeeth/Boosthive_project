@@ -1,32 +1,10 @@
-const mongoose = require("mongoose");
-require("./db");
-
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    enum: ["admin", "user", "Business Owner"],
-    default: "user",
-  },
-  location: {
-    type: String,
-    required: true,
-  },
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const UserdataSchema = new Schema();
+UserdataSchema.virtual('postedDatas', {
+  ref: 'PostedData',
+  localField: '_id',
+  foreignField: 'userData',
 });
 
-const UserData = mongoose.model("PostedData", userSchema);
-
-module.exports = UserData;
+module.exports = mongoose.model('UserData', UserdataSchema, 'userData');
