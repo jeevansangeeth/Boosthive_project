@@ -4,7 +4,7 @@ import { Register } from "./pages/Register";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { BusinessOwnerDashboard } from "./pages/BusinessOwnerDashboard";
 import { CategoryList } from "./pages/CategoryList";
-import { BusinessPost } from "./pages/BusinessPost";
+import BusinessPost from "./pages/BusinessPost";
 
 import { HomePage } from "./pages/HomePage";
 import { UserDashboard } from "./pages/UserDashboard";

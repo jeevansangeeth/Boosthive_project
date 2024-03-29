@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-require("./db");
+import mongoose from "mongoose";
+import db from "./db.js";
 
 const postSchema = new mongoose.Schema({
   image: { type: String, required: true },
@@ -10,4 +10,4 @@ const postSchema = new mongoose.Schema({
 
 const PostedData = mongoose.model("PostedData", postSchema);
 
-module.exports = PostedData;
+export default PostedData;

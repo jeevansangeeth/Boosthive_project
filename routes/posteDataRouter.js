@@ -1,10 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const PostedData = require("../models/postedData");
-const UserData = require("../models/Userdata");
+import post from "../controllers/postdataController.js";
 
-router.post("/postData", async (req, res) => {});
+router.post("/api/posts", post);
 
-router.get("/postData", async (req, res) => {});
-
-module.exports = router;
+export default router;

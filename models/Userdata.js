@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-require("./db");
+import mongoose from "mongoose";
+import db from "./db.js";
 
 const userSchema = new mongoose.Schema({
   username: {
