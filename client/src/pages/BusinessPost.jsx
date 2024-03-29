@@ -1,5 +1,5 @@
 import React from "react";
-
-export const BusinessPost = () => {
-  return <div>BusinessPost</div>;
+const BusinessPost = () => {
+  return <div>CategoryList</div>;
 };
+export default BusinessPost;

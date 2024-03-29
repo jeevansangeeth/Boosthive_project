@@ -1,10 +1,10 @@
 import React from "react";
 import HomeDecor from "../assets/images/HomeDecor.jpg";
-
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <div>
       <img src={HomeDecor} alt="" />
     </div>
   );
 };
+export default HomePage;

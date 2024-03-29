@@ -1,14 +1,26 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
-import { AdminDashboard } from "./pages/AdminDashboard";
-import { BusinessOwnerDashboard } from "./pages/BusinessOwnerDashboard";
-import { CategoryList } from "./pages/CategoryList";
-import { BusinessPost } from "./pages/BusinessPost";
-
-import { HomePage } from "./pages/HomePage";
-import { UserDashboard } from "./pages/UserDashboard";
-import { HomeLayout } from "./pages/HomeLayout";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
+// import AdminDashboard from "./pages/AdminDashboard";
+// import BusinessOwnerDashboard from "./pages/BusinessOwnerDashboard";
+// import CategoryList from "./pages/CategoryList";
+// import BusinessPost from "./pages/BusinessPost";
+// import UpdatePost from "./pages/UpdatePost";
+// import HomePage from "./pages/HomePage";
+// import UserDashboard from "./pages/UserDashboard";
+// import HomeLayout from "../src/pages/BusinessPost";
+import {
+  Login,
+  Register,
+  AdminDashboard,
+  BusinessOwnerDashboard,
+  CategoryList,
+  BusinessPost,
+  HomePage,
+  HomeLayout,
+  UserDashboard,
+  UpdatePost,
+} from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "userdashboard",
         element: <UserDashboard />,
+      },
+      {
+        path: "update/:id",
+        element: <UpdatePost />,
       },
     ],
   },
