@@ -1,10 +1,20 @@
-const express = require("express");
+import express from "express";
+
 const router = express.Router();
-const PostedData = require("../models/postedData");
-const UserData = require("../models/Userdata");
+import post from "../controllers/postdataController.js";
 
-router.post("/postData", async (req, res) => {});
+router.post("/api/posts", post);
 
-router.get("/postData", async (req, res) => {});
+import {
+  ApprovedDatas,
+  PostedDatas,
+  RejectDatas,
+} from "../controllers/demoController.js";
+const router = express.Router();
 
-module.exports = router;
+router.get("/postedData", PostedDatas);
+router.put("/approveData/:id", ApprovedDatas);
+router.put("/rejectedData/:id", RejectDatas);
+
+
+export default router;

@@ -1,5 +1,6 @@
 import React from "react";
 
-export const BusinessOwnerDashboard = () => {
+const BusinessOwnerDashboard = () => {
   return <div>BusinessOwnerDashboard</div>;
 };
+export default BusinessOwnerDashboard;

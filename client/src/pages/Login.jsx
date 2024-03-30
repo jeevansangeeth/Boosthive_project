@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom"; // Import useNavigate hook
 import axios from "axios";
 
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -135,3 +136,9 @@ const InputLabel = styled.label`
   font-weight: bold;
   text-align: left;
 `;
+
+const Login = () => {
+  return <div>Login</div>;
+};
+export default Login;
+

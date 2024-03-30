@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 
+
 export const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -229,3 +230,9 @@ const ErrorMessage = styled.p`
   font-size: 14px;
   text-align: center;
 `;
+
+const Register = () => {
+  return <div>Register</div>;
+};
+export default Register;
+
