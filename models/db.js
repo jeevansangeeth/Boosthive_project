@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 mongoose
   .connect("mongodb://localhost:27017/Boosthive")
   .then(() => console.log("server connected"))
@@ -6,3 +7,15 @@ mongoose
 
 const db = mongoose.connection;
 export default db;
+
+const connectDB = () => {
+  mongoose
+    .connect("mongodb://localhost:27017/Boosthive", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB connected"))
+    .catch((err) => console.error("MongoDB connection error: ", err));
+};
+export default connectDB;
+

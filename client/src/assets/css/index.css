@@ -1,0 +1,39 @@
+.hero {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    42deg,
+    rgba(243, 152, 253, 0.519) 6%,
+    rgba(0, 212, 255, 0) 100%
+  );
+  background-size: cover;
+}
+
+.para1 {
+  font-family: "Kanit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 410;
+  font-style: normal;
+  color: blueviolet;
+  font-size: 50px;
+  line-height: 60px;
+}
+.para2 {
+  font-family: "Kanit", sans-serif;
+  font-weight: 310;
+  font-size: 18px;
+  line-height: 30px;
+}
+a {
+  margin-right: 20px;
+  padding: 10px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 18px;
+}
+a:hover {
+  background-color: rgb(87, 7, 161);
+  box-shadow: 5px 5px 3px #bb87bb;
+}

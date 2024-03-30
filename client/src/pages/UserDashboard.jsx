@@ -1,5 +1,6 @@
 import React from "react";
 
-export const UserDashboard = () => {
+const UserDashboard = () => {
   return <div>UserDashboard</div>;
 };
+export default UserDashboard;
