@@ -1,6 +1,13 @@
+
+import connectDB from "./db.js";
+import mongoose from "mongoose";
+
 import mongoose from "mongoose";
 import db from "./db.js";
 
+
+// Connect to MongoDB
+connectDB();
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -21,12 +28,6 @@ const userSchema = new mongoose.Schema({
     enum: ["admin", "user", "Business Owner"],
     default: "user",
   },
-  location: {
-    type: String,
-    required: true,
-  },
 });
 
-const UserData = mongoose.model("PostedData", userSchema);
-
-module.exports = UserData;
+export const UserData = mongoose.model("userdatas", userSchema);
