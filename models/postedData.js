@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
+
+import db from "./db.js";
+
 import connectDB from "./db.js";
+
 
 connectDB();
 const postSchema = new mongoose.Schema({

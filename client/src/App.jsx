@@ -1,4 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { AdminDashboard } from "./pages/AdminDashboard";
+import { BusinessOwnerDashboard } from "./pages/BusinessOwnerDashboard";
+import { CategoryList } from "./pages/CategoryList";
+import BusinessPost from "./pages/BusinessPost";
+
+import { HomePage } from "./pages/HomePage";
+import { UserDashboard } from "./pages/UserDashboard";
+import { HomeLayout } from "./pages/HomeLayout";
+
 import {
   Login,
   Register,
@@ -11,6 +23,7 @@ import {
   HomeLayout,
   LandingPage,
 } from "./pages";
+
 
 const router = createBrowserRouter([
   {
