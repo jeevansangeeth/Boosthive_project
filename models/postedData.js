@@ -1,13 +1,15 @@
-const mongoose = require("mongoose");
-require("./db");
+import mongoose from "mongoose";
+import connectDB from "./db.js";
 
+connectDB();
 const postSchema = new mongoose.Schema({
-  image: { type: String, required: true },
-  businessName: { type: String, required: true },
-  businessType: { type: String, required: true },
-  description: { type: String, required: true },
+  image: { type: String },
+  businessName: { type: String },
+  businessType: { type: String },
+  description: { type: String },
+  flag: { type: String },
 });
 
-const PostedData = mongoose.model("PostedData", postSchema);
+const PostedData = mongoose.model("postedData", postSchema);
 
-module.exports = PostedData;
+export default PostedData;

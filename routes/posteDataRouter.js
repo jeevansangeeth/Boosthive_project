@@ -1,10 +1,13 @@
-const express = require("express");
+import express from "express";
+import {
+  ApprovedDatas,
+  PostedDatas,
+  RejectDatas,
+} from "../controllers/demoController.js";
 const router = express.Router();
-const PostedData = require("../models/postedData");
-const UserData = require("../models/Userdata");
 
-router.post("/postData", async (req, res) => {});
+router.get("/postedData", PostedDatas);
+router.put("/approveData/:id", ApprovedDatas);
+router.put("/rejectedData/:id", RejectDatas);
 
-router.get("/postData", async (req, res) => {});
-
-module.exports = router;
+export default router;
