@@ -1,10 +1,7 @@
-
 import connectDB from "./db.js";
 import mongoose from "mongoose";
 
-import mongoose from "mongoose";
 import db from "./db.js";
-
 
 // Connect to MongoDB
 connectDB();

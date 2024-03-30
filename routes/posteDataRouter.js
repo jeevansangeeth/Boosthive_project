@@ -1,10 +1,7 @@
 import express from "express";
-
-const router = express.Router();
 import post from "../controllers/postdataController.js";
-
-router.post("/api/posts", post);
-
+import {Registration, Login} from "../controllers/authController.js";
+import {authenticateUser} from "../middleware/authMiddleware.js";
 import {
   ApprovedDatas,
   PostedDatas,
@@ -12,6 +9,11 @@ import {
 } from "../controllers/demoController.js";
 const router = express.Router();
 
+
+
+router.post("/register", Registration);
+router.post("/login", Login, authenticateUser);
+router.post("/api/posts", post);
 router.get("/postedData", PostedDatas);
 router.put("/approveData/:id", ApprovedDatas);
 router.put("/rejectedData/:id", RejectDatas);

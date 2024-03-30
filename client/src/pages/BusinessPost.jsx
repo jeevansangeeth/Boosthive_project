@@ -3,7 +3,6 @@ import axios from "axios";
 import "../assets/css/BusinessPost.css";
 
 const BusinessPost = () => {
-
   const [formData, setFormData] = useState({
     image: "",
     businessName: "",
@@ -90,10 +89,6 @@ const BusinessPost = () => {
       </div>
     </div>
   );
-};
-
-
-  return <div>BusinessPost</div>;
 };
 
 export default BusinessPost;

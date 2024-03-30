@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-
-export const Register = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +14,7 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     if (name === "username") setUsername(value);
     else if (name === "email") setEmail(value);
     else if (name === "password") setPassword(value);
@@ -80,6 +79,8 @@ export const Register = () => {
             placeholder="Username"
             value={username}
             onChange={handleChange}
+            pattern="[A-Za-z\s]{3,}"
+            title="Name should contain only letters and spaces, and be at least 3 characters long"
             required
           />
           <InputLabel htmlFor="email">Enter Email Address</InputLabel>
@@ -90,6 +91,8 @@ export const Register = () => {
             placeholder="Email"
             value={email}
             onChange={handleChange}
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"
             required
           />
           <InputLabel htmlFor="password">Create a Password</InputLabel>
@@ -100,6 +103,8 @@ export const Register = () => {
             placeholder="Password"
             value={password}
             onChange={handleChange}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
+            title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
             required
           />
           <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
@@ -135,7 +140,7 @@ export const Register = () => {
 const StyledRegistrationForm = styled.div`
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 3rem auto;
   padding: 20px;
   background-color: #ddd0e4;
   border-radius: 8px;
@@ -145,7 +150,7 @@ const StyledRegistrationForm = styled.div`
     margin-bottom: 20px;
     color: #333;
     text-transform: uppercase;
-    // text-align: center;
+    text-align: center;
   }
 
   div {
@@ -203,23 +208,17 @@ const Select = styled.select`
 `;
 
 const Button = styled.button`
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+  margin: 10px;
+  padding: 8px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 18px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: rgb(87, 7, 161);
+    box-shadow: 5px 5px 3px #bb87bb;
   }
 `;
 
@@ -231,8 +230,4 @@ const ErrorMessage = styled.p`
   text-align: center;
 `;
 
-const Register = () => {
-  return <div>Register</div>;
-};
 export default Register;
-

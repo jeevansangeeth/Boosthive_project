@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom"; // Import useNavigate hook
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
 import axios from "axios";
 
-
-export const Login = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,30 +35,37 @@ export const Login = () => {
     <StyledLoginForm>
       <div>
         <h2>Login </h2>
-        {error && <p style={{color: "red"}}>{error}</p>}
+        {error && <ErrorMessage style={{ color: "red" }}>{error}</ErrorMessage>}
         <form onSubmit={handleLogin}>
           <InputLabel htmlFor="email">Enter Email Address</InputLabel>
-          <input
+          <Input
             type="email"
             name="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"
             required
           />
           <InputLabel htmlFor="password">Create a Password</InputLabel>
-          <input
+          <Input
             type="password"
             name="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
+            title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
             required
           />
-          <button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
-          </button>
+          </Button>
         </form>
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
       </div>
     </StyledLoginForm>
   );
@@ -68,7 +74,8 @@ export const Login = () => {
 const StyledLoginForm = styled.div`
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  // margin: 0 auto;
+  margin: 5rem auto;
   padding: 20px;
   background-color: #ddd0e4;
   border-radius: 8px;
@@ -81,55 +88,23 @@ const StyledLoginForm = styled.div`
     text-align: center;
   }
 
+  div {
+    padding: 0 20px;
+  }
+
   form {
     display: flex;
     flex-direction: column;
-  }
-
-  input {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-    align-items: center;
-  }
-
-  input:focus {
-    border-color: #007bff;
-  }
-
-  button {
-    width: calc(100% - 20px);
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-
-  button:hover {
-    background-color: #0056b3;
+    // align-items: center;
   }
 
   p {
-    color: red;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    color: #333;
     text-align: center;
+    margin-top: 20px;
   }
 `;
+
 const InputLabel = styled.label`
   color: #333;
   margin-bottom: 6px;
@@ -137,8 +112,42 @@ const InputLabel = styled.label`
   text-align: left;
 `;
 
-const Login = () => {
-  return <div>Login</div>;
-};
-export default Login;
+const Input = styled.input`
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+const Button = styled.button`
+  margin: 10px;
+  padding: 8px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 18px;
+
+  &:hover {
+    background-color: rgb(87, 7, 161);
+    box-shadow: 5px 5px 3px #bb87bb;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+`;
+
+export default Login;
