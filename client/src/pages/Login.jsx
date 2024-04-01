@@ -6,9 +6,9 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role2, setRole] = useState(""); // State for role
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleLogin = async (e) => {
@@ -18,11 +18,25 @@ const Login = () => {
       const response = await axios.post("http://localhost:5000/api/login", {
         email,
         password,
+        role2,
       });
-      setToken(response.data.token);
       console.log(response.data);
       alert("Login successful");
-      navigate("/"); // Navigate to the home page ("/") after successful login
+
+      // Extract the role from the response and log it
+      const { role } = response.data;
+      console.log("Role from response:", role);
+
+      switch (role) {
+        case "admin":
+          navigate("/admindashboard");
+          break;
+        case "Business Owner":
+          navigate("/businessownerdashboard");
+          break;
+        default:
+          navigate("/userdashboard");
+      }
     } catch (error) {
       console.error("Error Logging in", error);
       setError("An error occurred while logging in");
@@ -30,7 +44,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
   return (
     <StyledLoginForm>
       <div>
@@ -48,7 +61,7 @@ const Login = () => {
             title="Please enter a valid email address"
             required
           />
-          <InputLabel htmlFor="password">Create a Password</InputLabel>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <Input
             type="password"
             name="password"
@@ -59,6 +72,19 @@ const Login = () => {
             title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
             required
           />
+          {/* Role selection */}
+          <InputLabel htmlFor="role">Select Role</InputLabel>
+          <Select
+            name="role"
+            value={role2}
+            onChange={(e) => setRole(e.target.value)}
+            required
+          >
+            <option value="">Select Role</option>
+            <option value="user">User</option>
+            <option value="Business Owner">Business Owner</option>
+            <option value="admin">Admin</option>
+          </Select>
           <Button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </Button>
@@ -70,6 +96,8 @@ const Login = () => {
     </StyledLoginForm>
   );
 };
+
+// Styled components and export remain unchanged
 
 const StyledLoginForm = styled.div`
   width: 100%;
@@ -126,7 +154,20 @@ const Input = styled.input`
     border-color: #007bff;
   }
 `;
+const Select = styled.select`
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 
+  &:focus {
+    border-color: #007bff;
+  }
+`;
 const Button = styled.button`
   margin: 10px;
   padding: 8px;

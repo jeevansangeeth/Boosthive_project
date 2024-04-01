@@ -4,9 +4,9 @@ import "../assets/css/AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [postedData, setPostedData] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
-  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
-  const [filteredData, setFilteredData] = useState([]); // State to store filtered data
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     axios
@@ -31,7 +31,6 @@ const AdminDashboard = () => {
     setFilteredData(filtered);
   }, [postedData, searchQuery]);
 
-  // Function to handle search input change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -42,6 +41,7 @@ const AdminDashboard = () => {
   const RejectedClick = (id) => {
     axios.put(`http://localhost:5000/api/rejectedData/${id}`);
   };
+
   return (
     <div className="admin-con">
       <nav className="navbar navbar-light bg-light">
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
               placeholder="Search"
               aria-label="Search"
               value={searchQuery}
-              onChange={handleSearchChange} // Call handleSearchChange on input change
+              onChange={handleSearchChange}
             />
             <button className="" type="submit">
               Search
@@ -65,39 +65,42 @@ const AdminDashboard = () => {
 
       <div className="container mt-4">
         {loading ? (
-          <p>Loading...</p> // Display loading message while data is being fetched
+          <p>Loading...</p>
         ) : (
-          filteredData.map((data) => (
-            <div className="container mb-5" key={data._id}>
-              <div className="row">
-                <div className="col-3">
-                  <img src={data.image} alt="image" />
+          <div className="row">
+            {filteredData.map((data) => (
+              <div className="col-12 mb-5" key={data._id}>
+                <div className="row">
+                  <div className="col-3">
+                    <img src={data.image} alt="image" />
+                  </div>
+                  <div className="col">
+                    <br />
+                    <h2> businessName : {data.businessName}</h2>
+                    <br />
+                    <h4>businessType : {data.businessType}</h4>
+                    <br />
+                    <br />
+                    <p>
+                      <b>Description</b>: {data.description}
+                    </p>
+                    <br />
+                    <button onClick={() => ApprovedClick(data._id)}>
+                      Approve
+                    </button>
+                    <button onClick={() => RejectedClick(data._id)}>
+                      Reject
+                    </button>
+                  </div>
                 </div>
-                <div className="col">
-                  <br />
-                  <h2> businessName : {data.businessName}</h2>
-                  <br />
-                  <h4>businessType : {data.businessType}</h4>
-                  <br />
-                  <br />
-                  <p>
-                    <b>Description</b>: {data.description}
-                  </p>
-                  <br />
-                  <button onClick={() => ApprovedClick(data._id)}>
-                    Approve
-                  </button>
-                  <button onClick={() => RejectedClick(data._id)}>
-                    Reject
-                  </button>
-                </div>
+                <hr />
               </div>
-              <hr />
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
     </div>
   );
 };
+
 export default AdminDashboard;

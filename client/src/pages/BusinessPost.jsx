@@ -47,7 +47,7 @@ const BusinessPost = () => {
             alt="Business"
           />
         </div>
-        <form onSubmit={handleSubmit} className="form-container">
+        <form onSubmit={handleSubmit} className="form-container ">
           <h3>Post Your Business Details</h3>
           <label htmlFor="image">Business Image:</label>
           <input
