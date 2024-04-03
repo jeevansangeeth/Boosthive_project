@@ -11,6 +11,7 @@ import {
   UserDashboard,
   HomeLayout,
   LandingPage,
+  OwnerDashboard,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        index: "home",
+        path: "home",
         element: <HomePage />,
       },
 
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "userdashboard",
         element: <UserDashboard />,
+      },
+      {
+        path: "ownerDashboard",
+        element: <OwnerDashboard />,
       },
     ],
   },

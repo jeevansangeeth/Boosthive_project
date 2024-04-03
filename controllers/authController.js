@@ -26,24 +26,21 @@ export const Registration = async (req, res) => {
       password: newUser.password,
       role: newUser.role,
     });
-    console.log(token);
+    // console.log(token);
     res.status(200).json({ token, message: "User registered successfully" });
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
-//Loggin as a User
-// Assuming your backend code for login authentication and token generation
-
-// Assuming your backend code for login authentication and token generation
 
 export const Login = async (req, res) => {
   try {
-    const { email, password, role } = req.body; // Extract role from request body
+    const { email, password, role } = req.body;
 
     // Find user by email
     const user = await UserData.findOne({ email });
+    console.log(user.role);
     if (!user) {
       return res.status(401).send({ message: "Invalid emailID" });
     }
@@ -53,10 +50,10 @@ export const Login = async (req, res) => {
     if (!validPassword) {
       return res.status(401).send({ message: "Invalid password" });
     }
-    const validRole = await comparedPassword(role, user.role);
-    if (!validRole) {
-      return res.status(401).send({ message: "Invalid role" });
-    }
+    // const validRole = await comparedPassword(role, user.role);
+    // if (!validRole) {
+    //   return res.status(401).send({ message: "Invalid role" });
+    // }
 
     // Generate token with user data including the role
     const token = createJWT({
@@ -65,10 +62,9 @@ export const Login = async (req, res) => {
       role: user.role,
     });
 
-    // Send the token and role in the response
     res
       .status(200)
-      .send({ token, role: user.role, message: "Login Successful" });
+      .send({ token, role: user.role, user, message: "Login Successful" });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ message: "Internal server error" });

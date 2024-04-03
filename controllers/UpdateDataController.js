@@ -1,7 +1,7 @@
 import PostedData from "../models/postedData.js";
 export const Find = async (req, res) => {
   try {
-    const posted = await PostedData.find({ flag: "Pending" });
+    const posted = await PostedData.find({ flag: "Approved" });
     if (posted) {
       res.json(posted);
     } else {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../assets/css/BusinessPost.css";
 
 const BusinessPost = () => {
@@ -9,7 +10,9 @@ const BusinessPost = () => {
     businessType: "",
     description: "",
   });
-
+  const location = useLocation();
+  const ownerId = location.state.user.ownerId;
+  console.log(ownerId);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -47,7 +50,7 @@ const BusinessPost = () => {
             alt="Business"
           />
         </div>
-        <form onSubmit={handleSubmit} className="form-container ">
+        <form onSubmit={handleSubmit} className="form-container">
           <h3>Post Your Business Details</h3>
           <label htmlFor="image">Business Image:</label>
           <input

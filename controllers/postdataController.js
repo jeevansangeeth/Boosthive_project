@@ -1,8 +1,11 @@
 import PostedData from "../models/postedData.js";
 const post = async (req, res) => {
   try {
-    const { image, businessName, businessType, description } = req.body;
+    console.log(req.body);
+    const { image, businessName, businessType, description, userId } = req.body;
+
     const newPost = new PostedData({
+      userId,
       image,
       businessName,
       businessType,

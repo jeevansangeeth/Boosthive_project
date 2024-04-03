@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role2, setRole] = useState(""); // State for role
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate hook
@@ -18,24 +17,22 @@ const Login = () => {
       const response = await axios.post("http://localhost:5000/api/login", {
         email,
         password,
-        role2,
       });
       console.log(response.data);
       alert("Login successful");
 
       // Extract the role from the response and log it
       const { role } = response.data;
-      console.log("Role from response:", role);
 
       switch (role) {
         case "admin":
-          navigate("/admindashboard");
+          navigate("/admindashboard", { state: { user: response.data } });
           break;
         case "Business Owner":
-          navigate("/businessownerdashboard");
+          navigate("/ownerDashboard", { state: { user: response.data } });
           break;
         default:
-          navigate("/userdashboard");
+          navigate("/userdashboard", { state: { user: response.data } });
       }
     } catch (error) {
       console.error("Error Logging in", error);
@@ -44,47 +41,41 @@ const Login = () => {
       setLoading(false);
     }
   };
+
   return (
     <StyledLoginForm>
       <div>
-        <h2>Login </h2>
-        {error && <ErrorMessage style={{ color: "red" }}>{error}</ErrorMessage>}
+        <h2>Login</h2>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <form onSubmit={handleLogin}>
-          <InputLabel htmlFor="email">Enter Email Address</InputLabel>
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-            title="Please enter a valid email address"
-            required
-          />
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
-            title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
-            required
-          />
+          <InputLabel>
+            Enter Email Address
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              title="Please enter a valid email address"
+              required
+            />
+          </InputLabel>
+          <InputLabel>
+            Password
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
+              title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
+              required
+            />
+          </InputLabel>
           {/* Role selection */}
-          <InputLabel htmlFor="role">Select Role</InputLabel>
-          <Select
-            name="role"
-            value={role2}
-            onChange={(e) => setRole(e.target.value)}
-            required
-          >
-            <option value="">Select Role</option>
-            <option value="user">User</option>
-            <option value="Business Owner">Business Owner</option>
-            <option value="admin">Admin</option>
-          </Select>
+
           <Button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </Button>

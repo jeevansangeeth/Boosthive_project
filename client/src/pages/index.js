@@ -8,3 +8,4 @@ export { default as HomePage } from "./HomePage";
 export { default as UserDashboard } from "./UserDashboard";
 export { default as LandingPage } from "./LandingPage";
 export { default as HomeLayout } from "./HomeLayout";
+export { default as OwnerDashboard } from "./OwnerDashboard";

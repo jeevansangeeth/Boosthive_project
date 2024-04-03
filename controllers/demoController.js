@@ -33,3 +33,13 @@ export const RejectDatas = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const MyPosts = async (req, res) => {
+  try {
+    const data = await PostedData.find({ bid: req.params.bid });
+    res.status(data);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

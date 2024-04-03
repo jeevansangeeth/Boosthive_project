@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-
-import db from "./db.js";
-
 import connectDB from "./db.js";
 
-
 connectDB();
+
 const postSchema = new mongoose.Schema({
+  bid: { type: mongoose.Types.ObjectId, ref: "Owner" },
   image: { type: String },
   businessName: { type: String },
   businessType: { type: String },
@@ -14,6 +12,6 @@ const postSchema = new mongoose.Schema({
   flag: { type: String },
 });
 
-const PostedData = mongoose.model("postedData", postSchema);
+const PostedData = mongoose.model("PostedData", postSchema);
 
 export default PostedData;

@@ -4,6 +4,7 @@ import { Registration, Login } from "../controllers/authController.js";
 import { authenticateUser } from "../middleware/authMiddleware.js";
 import {
   ApprovedDatas,
+  MyPosts,
   PostedDatas,
   RejectDatas,
 } from "../controllers/demoController.js";
@@ -17,7 +18,7 @@ const router = express.Router();
 
 router.post("/register", Registration);
 router.post("/login", Login, authenticateUser);
-router.post("/api/posts", post, authenticateUser);
+router.post("/posts", post, authenticateUser);
 router.get("/postedData", PostedDatas, authenticateUser);
 router.put("/approveData/:id", ApprovedDatas, authenticateUser);
 router.put("/rejectedData/:id", RejectDatas, authenticateUser);
@@ -25,5 +26,6 @@ router.get("/postdata", Find, authenticateUser);
 router.get("/postdata/:id", FindById, authenticateUser);
 router.put("/postdata/update/:id", Update, authenticateUser);
 router.delete("/postdata/delete/:id", Delete, authenticateUser);
+router.get("/myposts/:bid", MyPosts, authenticateUser);
 
 export default router;
