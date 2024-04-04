@@ -23,6 +23,7 @@ const Login = () => {
 
       // Extract the role from the response and log it
       const { role } = response.data;
+      console.log(role);
 
       switch (role) {
         case "admin":
@@ -32,7 +33,7 @@ const Login = () => {
           navigate("/ownerDashboard", { state: { user: response.data } });
           break;
         default:
-          navigate("/userdashboard", { state: { user: response.data } });
+          navigate("/home", { state: { user: response.data } });
       }
     } catch (error) {
       console.error("Error Logging in", error);
@@ -45,36 +46,31 @@ const Login = () => {
   return (
     <StyledLoginForm>
       <div>
-        <h2>Login</h2>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <h2>Login </h2>
+        {error && <ErrorMessage style={{ color: "red" }}>{error}</ErrorMessage>}
         <form onSubmit={handleLogin}>
-          <InputLabel>
-            Enter Email Address
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-              title="Please enter a valid email address"
-              required
-            />
-          </InputLabel>
-          <InputLabel>
-            Password
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
-              title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
-              required
-            />
-          </InputLabel>
-          {/* Role selection */}
+          <InputLabel htmlFor="email">Enter Email Address</InputLabel>
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"
+            required
+          />
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,}"
+            title="Password should contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long"
+            required
+          />
 
           <Button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}

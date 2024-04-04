@@ -4,9 +4,10 @@ import { Registration, Login } from "../controllers/authController.js";
 import { authenticateUser } from "../middleware/authMiddleware.js";
 import {
   ApprovedDatas,
-  MyPosts,
+  MyPost,
   PostedDatas,
   RejectDatas,
+  ViewPost,
 } from "../controllers/demoController.js";
 import {
   Find,
@@ -26,6 +27,7 @@ router.get("/postdata", Find, authenticateUser);
 router.get("/postdata/:id", FindById, authenticateUser);
 router.put("/postdata/update/:id", Update, authenticateUser);
 router.delete("/postdata/delete/:id", Delete, authenticateUser);
-router.get("/myposts/:bid", MyPosts, authenticateUser);
+router.get("/mypost/:id", MyPost, authenticateUser);
+router.get("/viewpost", ViewPost, authenticateUser);
 
 export default router;

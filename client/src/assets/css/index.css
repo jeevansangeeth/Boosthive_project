@@ -24,7 +24,7 @@
   font-size: 18px;
   line-height: 30px;
 }
-a {
+.button {
   margin-right: 20px;
   padding: 10px;
   background-color: blueviolet;
@@ -32,8 +32,10 @@ a {
   border-radius: 5px;
   font-weight: 700;
   font-size: 18px;
+  text-decoration: none;
 }
-a:hover {
+.button:hover {
   background-color: rgb(87, 7, 161);
-  box-shadow: 5px 5px 3px #bb87bb;
+  box-shadow: 5px 5px 3px #bb87bb;/
+  
 }

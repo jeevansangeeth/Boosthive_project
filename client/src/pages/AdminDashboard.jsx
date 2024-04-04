@@ -44,19 +44,19 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-con">
-      <nav className="navbar navbar-light bg-light">
+      <nav className="navbar navbar-light bg-light sticky-top">
         <div className="container-fluid">
           <h5 className="navbar-brand te">Admin Dashboard</h5>
           <form className="d-flex">
             <input
-              className="form-control me-2"
+              className="form-control mt-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
               value={searchQuery}
               onChange={handleSearchChange}
             />
-            <button className="" type="submit">
+            <button className="sbutton" type="submit">
               Search
             </button>
           </form>
@@ -72,23 +72,40 @@ const AdminDashboard = () => {
               <div className="col-12 mb-5" key={data._id}>
                 <div className="row">
                   <div className="col-3">
-                    <img src={data.image} alt="image" />
+                    <img
+                      className="img"
+                      src={data.image}
+                      alt="image"
+                      style={{
+                        width: "100%",
+                        height: "250px",
+                        objectFit: "cover",
+                        borderRadius: "5px",
+                        margintTop: "10px",
+                      }}
+                    />
                   </div>
                   <div className="col">
                     <br />
                     <h2> businessName : {data.businessName}</h2>
                     <br />
                     <h4>businessType : {data.businessType}</h4>
-                    <br />
+                    {/* <br /> */}
                     <br />
                     <p>
                       <b>Description</b>: {data.description}
                     </p>
                     <br />
-                    <button onClick={() => ApprovedClick(data._id)}>
+                    <button
+                      className="button"
+                      onClick={() => ApprovedClick(data._id)}
+                    >
                       Approve
                     </button>
-                    <button onClick={() => RejectedClick(data._id)}>
+                    <button
+                      className="button"
+                      onClick={() => RejectedClick(data._id)}
+                    >
                       Reject
                     </button>
                   </div>

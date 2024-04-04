@@ -4,10 +4,11 @@ import connectDB from "./db.js";
 connectDB();
 
 const postSchema = new mongoose.Schema({
-  bid: { type: mongoose.Types.ObjectId, ref: "Owner" },
+  ownerId: { type: mongoose.Types.ObjectId },
   image: { type: String },
   businessName: { type: String },
   businessType: { type: String },
+  location: { type: String },
   description: { type: String },
   flag: { type: String },
 });

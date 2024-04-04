@@ -22,13 +22,13 @@ const LandingPage = () => {
                 <div className="text-center text-lg-start">
                   <a
                     href="/login"
-                    className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+                    className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center button"
                   >
                     <span>Login</span>
                   </a>
                   <a
                     href="/register"
-                    className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+                    className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center button"
                   >
                     <span>Register</span>
                   </a>

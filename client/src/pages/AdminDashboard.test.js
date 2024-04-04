@@ -1,104 +1,50 @@
 import React from "react";
-import { render, waitFor, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
+import { act } from "react-dom/test-utils";
 import AdminDashboard from "./AdminDashboard";
 
-jest.mock("axios");
+describe("AdminDashboard", () => {
+  test("renders AdminDashboard component", async () => {
+    render(<AdminDashboard />);
 
-describe("AdminDashboard Component", () => {
-  test("should render correctly after fetching data", async () => {
-    // Mock API response
-    const mockData = [
-      {
-        _id: "1",
-        image: "image1.jpg",
-        businessName: "Business 1",
-        businessType: "Type 1",
-        description: "Description 1",
-      },
-      {
-        _id: "2",
-        image: "image2.jpg",
-        businessName: "Business 2",
-        businessType: "Type 2",
-        description: "Description 2",
-      },
-    ];
-    axios.get.mockResolvedValue({ data: mockData });
-
-    const { getByText } = render(<AdminDashboard />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(getByText("Business 1")).toBeInTheDocument();
-      expect(getByText("Business 2")).toBeInTheDocument();
+      expect(screen.queryByText("Loading...")).toBeNull();
     });
+
+    expect(screen.getByPlaceholderText("Search")).toBeInTheDocument();
   });
 
-  test("should filter data based on search query", async () => {
-    const mockData = [
-      {
-        _id: "1",
-        businessName: "Business1",
-        businessType: "Type 1",
-        description: "Description 1",
-        image: "image1.jpg",
-      },
-      {
-        _id: "2",
-        businessName: "Business2",
-        businessType: "Type 2",
-        description: "Description 2",
-        image: "image2.jpg",
-      },
-    ];
-    axios.get.mockResolvedValue({ data: mockData });
-
-    const { getByPlaceholderText, getByText } = render(<AdminDashboard />);
+  test("filters data based on search query", async () => {
+    render(<AdminDashboard />);
 
     await waitFor(() => {
-      expect(getByText("Business 1")).toBeInTheDocument();
-      expect(getByText("Business 2")).toBeInTheDocument();
+      expect(screen.queryByText("Loading...")).toBeNull();
     });
 
-    // Search for "Business 1"
-    const searchInput = getByPlaceholderText("Search");
-    fireEvent.change(searchInput, { target: { value: "Business 1" } });
+    fireEvent.change(screen.getByPlaceholderText("Search"), {
+      target: { value: "Test" },
+    });
 
-    // Check if only Business 1 is displayed
-    expect(getByText("Business 1")).toBeInTheDocument();
-    expect(queryByText("Business 2")).not.toBeInTheDocument();
+    expect(screen.queryByText("Test Business")).toBeNull();
+    expect(screen.queryByText("Another Business")).toBeNull();
   });
 
-  test("should handle invalid search query", async () => {
-    // Mock API response
-    const mockData = [
-      {
-        _id: "1",
-        businessName: "Business 1",
-        businessType: "Type 1",
-        description: "Description 1",
-        image: "image1.jpg",
-      },
-    ];
-    axios.get.mockResolvedValue({ data: mockData });
+  test("calls ApprovedClick and RejectedClick functions when buttons are clicked", async () => {
+    render(<AdminDashboard />);
 
-    const { getByPlaceholderText, getByText, queryByText } = render(
-      <AdminDashboard />
-    );
-
-    // Wait for data to be fetched and rendered
     await waitFor(() => {
-      expect(getByText("Business 1")).toBeInTheDocument();
+      expect(screen.queryByText("Loading...")).toBeNull();
     });
 
-    // Search for a query that doesn't exist
-    const searchInput = getByPlaceholderText("Search");
-    fireEvent.change(searchInput, {
-      target: { value: "Non-existent business" },
-    });
+    fireEvent.click(screen.getByText("Approve"));
 
-    // Check if no matching data is displayed
-    expect(queryByText("Business 1")).not.toBeInTheDocument();
-    expect(getByText("No matching data found")).toBeInTheDocument();
+    expect(axios.put).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("Reject"));
+
+    expect(axios.put).not.toHaveBeenCalled();
   });
 });

@@ -1,0 +1,10 @@
+.bg {
+  background: linear-gradient(
+    42deg,
+    rgba(243, 152, 253, 0.519) 6%,
+    rgba(0, 212, 255, 0) 100%
+  );
+}
+button {
+  margin-right: 20px;
+}
